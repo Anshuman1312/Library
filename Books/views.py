@@ -49,7 +49,7 @@ class UpdateDeleteAndGetSpecificLibrary(APIView):
     def get(self,request,id=None):
         try:
             library=Library.objects.get(id=id)
-            serializer = LibrarySerializer(library, many=True)
+            serializer = LibrarySerializer(library)
             return Response(serializer.data)
         except Exception as e:
             return Response({"Something went wrong" : str(e)})
@@ -99,7 +99,7 @@ class UpdateDeleteAndGetSpecificBook(APIView):
     def get(self,request,id=None):
         try:
             library=Book.objects.get(id=id)
-            serializer = BookSerializer(library, many=True)
+            serializer = BookSerializer(library)
             return Response(serializer.data)
         except Exception as e:
             return Response({"Something went wrong" : str(e)})
