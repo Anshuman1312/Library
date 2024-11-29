@@ -3,8 +3,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import *
 from .serializer import *
+from rest_framework.permissions import IsAuthenticated
 
 class LibraryAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         try:
             libraries = Library.objects.all()
@@ -24,6 +26,7 @@ class LibraryAPIView(APIView):
             return Response({"Something went wrong" : str(e)})
     
 class UpdateDeleteAndGetSpecificLibrary(APIView):
+    permission_classes = [IsAuthenticated]
     def put(self,request,id=None):
         try:
             library=Library.objects.get(id=id)
@@ -55,6 +58,7 @@ class UpdateDeleteAndGetSpecificLibrary(APIView):
             return Response({"Something went wrong" : str(e)})
 
 class BookAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         try:
             books = Book.objects.all()
@@ -74,6 +78,7 @@ class BookAPIView(APIView):
             return Response({"Something went wrong" : str(e)})
         
 class UpdateDeleteAndGetSpecificBook(APIView):
+    permission_classes = [IsAuthenticated]
     def put(self,request,id=None):
         try:
             library=Book.objects.get(id=id)
